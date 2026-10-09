@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>করড়া দক্ষিণপাড়া ফুটবল একাডেমি</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #006837;
+            --primary-dark: #004d28;
+            --accent-color: #d8232a;
+            --bg-color: #0b130e;
+            --card-bg: #142218;
+            --text-color: #ffffff;
+            --text-muted: #a0b0a5;
+            --border-color: #1e3525;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        /* Navbar */
+        header {
+            background-color: rgba(11, 19, 14, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+            background: #fff;
+        }
+
+        .logo-text h1 {
+            font-size: 1.2rem;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .admin-btn {
+            background-color: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+
+        .admin-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Hero / Banner Section */
+        .hero {
+            position: relative;
+            min-height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            padding: 60px 20px;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(0deg, var(--bg-color) 0%, rgba(11,19,14,0.7) 50%, rgba(11,19,14,0.85) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: #fff;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 8px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Player Grid */
+        .player-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        .player-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.3s ease;
+            position: relative;
+        }
+
+        .player-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 20px rgba(0,104,55,0.2);
+        }
+
+        .player-img-container {
+            width: 100%;
+            height: 260px;
+            position: relative;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .player-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.3s ease;
+        }
+
+        .player-card:hover .player-img {
+            transform: scale(1.05);
+        }
+
+        .jersey-number {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary-color);
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 800;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .player-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .player-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .player-position {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            background: rgba(0, 104, 55, 0.15);
+            padding: 3px 10px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        /* Modal / Admin Panel */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            overflow-y: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 1.8rem;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .admin-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .admin-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            color: #fff;
+            font-size: 0.95rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Color Picker Section */
+        .color-pickers {
+            display: flex;
+            gap: 20px;
+        }
+
+        .color-picker-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .color-picker-item input {
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+        }
+
+        /* Admin Player List Table */
+        .player-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .player-table th, .player-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: #fff;
+        }
+
+        .edit-btn { background-color: #f39c12; }
+        .delete-btn { background-color: #e74c3c; }
+
+        /* Footer */
+        footer {
+            background-color: #050a07;
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 1.8rem; }
+            .hero-subtitle { font-size: 1rem; }
+            .logo-text h1 { font-size: 1rem; }
+            .logo-text p { font-size: 0.7rem; }
+            .color-pickers { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="https://via.placeholder.com/100/006837/ffffff?text=KSFA" id="navLogo" class="logo-img" alt="Logo">
+                <div class="logo-text">
+                    <h1 id="academyNameBn">করড়া দক্ষিণপাড়া ফুটবল একাডেমি</h1>
+                    <p id="academyNameEn">KARRA SOUTH PARA FOOTBALL ACADEMY</p>
+                </div>
+            </div>
+            <button class="admin-btn" onclick="openAdminModal()">
+                <i class="fa-solid fa-gear"></i> অ্যাডমিন প্যানেল
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero / Banner Section -->
+    <section class="hero" id="heroBanner" style="background-image: url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1200&q=80');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-tag" id="bannerTag">অফিসিয়াল ওয়েবসাইট</span>
+            <h1 class="hero-title" id="bannerTitle">MATCHDAY! LET'S GO GREEN!</h1>
+            <p class="hero-subtitle" id="bannerSubtitle">প্যাশন, প্রাইড এবং ভিক্টোরি—আমাদের একাডেমির সাথে নতুন উচ্চতায় পৌঁছান।</p>
+        </div>
+    </section>
+
+    <!-- Main Player Squad Section -->
+    <main class="container">
+        <div class="section-title">
+            <h2>স্কোয়াড প্লেয়ারবৃন্দ</h2>
+        </div>
+        <div class="player-grid" id="playerGrid">
+            <!-- Dynamic Player Cards Will Load Here -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; <span id="year"></span> <span id="footerText">করড়া দক্ষিণপাড়া ফুটবল একাডেমি</span>। সর্বস্বত্ব সংরক্ষিত।</p>
+    </footer>
+
+    <!-- Admin Panel Modal -->
+    <div class="modal" id="adminModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeAdminModal()">&times;</span>
+            <h2 style="margin-bottom: 20px; color: #fff;"><i class="fa-solid fa-sliders"></i> ওয়েবসাইট ম্যানেজমেন্ট প্যানেল</h2>
+
+            <!-- 1. Theme Color Settings -->
+            <div class="admin-section">
+                <h3><i class="fa-solid fa-palette"></i> কালার ও থিম সেটিং</h3>
+                <div class="color-pickers">
+                    <div class="color-picker-item">
+                        <label>প্রধান রং (Primary):</label>
+                        <input type="color" id="primaryColorPicker" value="#006837" onchange="changeThemeColors()">
+                    </div>
+                    <div class="color-picker-item">
+                        <label>অ্যাকসেন্ট রং (Accent):</label>
+                        <input type="color" id="accentColorPicker" value="#d8232a" onchange="changeThemeColors()">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Banner Settings -->
+            <div class="admin-section">
+                <h3><i class="fa-solid fa-image"></i> ব্যানার পরিবর্তন</h3>
+                <form id="bannerForm" onsubmit="saveBannerSettings(event)">
+                    <div class="form-group">
+                        <label>ব্যানার ছবি (URL):</label>
+                        <input type="text" id="bannerImgInput" class="form-control" placeholder="ছবি এর লিংক দিন">
+                    </div>
+                    <div class="form-group">
+                        <label>ট্যাগলাইন:</label>
+                        <input type="text" id="bannerTagInput" class="form-control" placeholder="যেমন: অফিসিয়াল ওয়েবসাইট">
+                    </div>
+                    <div class="form-group">
+                        <label>প্রধান শিরোনাম (Title):</label>
+                        <input type="text" id="bannerTitleInput" class="form-control" placeholder="যেমন: MATCHDAY! LET'S GO GREEN!">
+                    </div>
+                    <div class="form-group">
+                        <label>উপ-শিরোনাম (Subtitle):</label>
+                        <input type="text" id="bannerSubtitleInput" class="form-control" placeholder="সংক্ষিপ্ত বিবরণী">
+                    </div>
+                    <button type="submit" class="submit-btn">ব্যানার আপডেট করুন</button>
+                </form>
+            </div>
+
+            <!-- 3. Player Add/Edit Settings -->
+            <div class="admin-section">
+                <h3><i class="fa-solid fa-user-plus"></i> খেলোয়াড় যোগ/পরিবর্তন</h3>
+                <form id="playerForm" onsubmit="savePlayer(event)">
+                    <input type="hidden" id="playerId">
+                    <div class="form-group">
+                        <label>খেলোয়াড়ের নাম:</label>
+                        <input type="text" id="playerName" class="form-control" required placeholder="যেমন: করিম আহমেদ">
+                    </div>
+                    <div class="form-group">
+                        <label>জার্সি নম্বর:</label>
+                        <input type="number" id="playerJersey" class="form-control" required placeholder="যেমন: 10">
+                    </div>
+                    <div class="form-group">
+                        <label>পজিশন:</label>
+                        <select id="playerPosition" class="form-control" required>
+                            <option value="গোলকিপার">গোলকিপার (GK)</option>
+                            <option value="ডিফেন্ডার">ডিফেন্ডার (DF)</option>
+                            <option value="মিডফিল্ডার">মিডফিল্ডার (MF)</option>
+                            <option value="ফরওয়ার্ড">ফরওয়ার্ড (FW)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>ছবি (URL):</label>
+                        <input type="text" id="playerImg" class="form-control" placeholder="ছবি এর লিংক দিন">
+                    </div>
+                    <button type="submit" class="submit-btn" id="playerFormBtn">নতুন খেলোয়াড় যোগ করুন</button>
+                </form>
+
+                <h4 style="margin-top: 25px; color: #fff;">বর্তমান খেলোয়াড়দের তালিকা</h4>
+                <div style="overflow-x: auto;">
+                    <table class="player-table">
+                        <thead>
+                            <tr>
+                                <th>ছবি</th>
+                                <th>নাম</th>
+                                <th>জার্সি</th>
+                                <th>পজিশন</th>
+                                <th>অ্যাকশন</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminPlayerTable">
+                            <!-- Dynamic Table Rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript Script -->
+    <script>
+        // Initial / Default Data
+        let appData = {
+            theme: {
+                primary: '#006837',
+                accent: '#d8232a'
+            },
+            banner: {
+                image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1200&q=80',
+                tag: 'অফিসিয়াল ওয়েবসাইট',
+                title: "MATCHDAY! LET'S GO GREEN!",
+                subtitle: 'প্যাশন, প্রাইড এবং ভিক্টোরি—আমাদের একাডেমির সাথে নতুন উচ্চতায় পৌঁছান।'
+            },
+            players: [
+                {
+                    id: 1,
+                    name: 'আলেক্স রিচার্ডস',
+                    jersey: 8,
+                    position: 'মিডফিল্ডার',
+                    image: 'https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?auto=format&fit=crop&w=500&q=80'
+                },
+                {
+                    id: 2,
+                    name: 'রাহিম চৌধুরী',
+                    jersey: 10,
+                    position: 'ফরওয়ার্ড',
+                    image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=500&q=80'
+                },
+                {
+                    id: 3,
+                    name: 'সাকিব হাসান',
+                    jersey: 1,
+                    position: 'গোলকিপার',
+                    image: 'https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&w=500&q=80'
+                }
+            ]
+        };
+
+        // Load data from LocalStorage on load
+        function initApp() {
+            const savedData = localStorage.getItem('ksfa_app_data');
+            if (savedData) {
+                appData = JSON.parse(savedData);
+            }
+            renderTheme();
+            renderBanner();
+            renderPlayers();
+            document.getElementById('year').textContent = new Date().getFullYear();
+        }
+
+        // Save data to LocalStorage
+        function saveData() {
+            localStorage.setItem('ksfa_app_data', JSON.stringify(appData));
+        }
+
+        // Render Theme Colors
+        function renderTheme() {
+            document.documentElement.style.setProperty('--primary-color', appData.theme.primary);
+            document.documentElement.style.setProperty('--accent-color', appData
